@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello SmartphoneController!{% endblock %}
+
+{% block body %}
+
+    <h1>Smartphones</h1>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Vendor</th>
+            <th scope="col">Type</th>
+            <th scope="col">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {# Loop door alle smartphones en toon hun gegevens in de tabel #}
+        {% for smartphone in smartphones %}
+            <tr>
+                <th scope="row">{{ smartphone.id }}</th>
+                <td>{{ smartphone.vendor.name }}</td>
+                <td>{{ smartphone.type }}</td>
+                <td>
+                    {# Actieknoppen voor bekijken, bewerken en verwijderen #}
+                    <a href="{{ path('app_view_smartphone', {'id': smartphone.id}) }}">
+                        <button class="btn btn-primary">View</button>
+                    </a>
+                    <a href="{{ path('app_update_smartphone', {'id': smartphone.id}) }}">
+                        <button class="btn btn-warning">Update</button>
+                    </a>
+                    <a href="{{ path('app_delete_smartphone', {'id': smartphone.id}) }}">
+                        <button class="btn btn-danger">Delete</button>
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    {# Knop om een nieuwe smartphone toe te voegen #}
+    <a href="{{ path('app_add_smartphone') }}">
+        <button class="btn btn-primary">Add</button>
+    </a>
+
+{% endblock %}
